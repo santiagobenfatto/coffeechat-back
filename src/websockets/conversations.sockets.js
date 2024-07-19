@@ -1,0 +1,1 @@
+// Utilizar el conver ID para crear un room y así tener el hadnshake de los sockets involucrados
