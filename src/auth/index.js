@@ -56,7 +56,7 @@ const socketsConfig = ({io}) => {
     io.use((socket, next) => {
         const data = socket.handshake.auth
         if(data){
-            console.log(data)
+            console.log(`Data: ${data}`)
         }
         next()
     })

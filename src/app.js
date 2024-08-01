@@ -13,6 +13,7 @@ const PORT = config.port || 3001
 const app = express()
 const httpServer = createServer(app)
 
+const originURL = config.corsOrigin
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -20,7 +21,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173',
+    origin: originURL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
 }))
 

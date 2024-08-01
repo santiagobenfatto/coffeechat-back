@@ -34,7 +34,7 @@ export default class ConversationsDAO {
     }
 
     changeName = async (converId, name) => {
-        const result = await conversationModel.findOneAndUpdate({_id: converId}, {conversation_name: name})
+        const result = await conversationModel.findOneAndUpdate({_id: converId}, {name: name})
         return result 
     }
     changeState = async (converId, state) => {

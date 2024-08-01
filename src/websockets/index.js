@@ -1,5 +1,6 @@
 import { Server } from 'socket.io'
-
+import MessageServices from '../services/messages.service.js'
+import MessagesSockets from './messages.sockets.js'
 
 export const initSockets = (httpServer) => {
 
@@ -12,8 +13,19 @@ export const initSockets = (httpServer) => {
 
     io.on('connection', (socket) => {
         console.log(`Socket ${socket.id} has been connected`)
-        socket.emit('userInfo', socket.request.user)
-        console.log(socket.request.user)
+        const reqUser = socket.request.user
+        const userData = {
+            first_name: reqUser.first_name,
+            nickname: reqUser.nickname,
+            email: reqUser.email,
+            avatar_url: reqUser.avatar_url
+        } 
+        socket.emit('userData', userData)
+
+        const messageService = new MessageServices()
+        new MessagesSockets(socket, messageService)
+
+        
         socket.on("disconnect", () => {
             console.log(`Socket ${socket.id} its disconnected`)
           })

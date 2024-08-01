@@ -8,16 +8,12 @@ export default class MessagesSockets {
     initMessagesSockets(){
         this.socket.on('privateMessage', async (message) => {
             try {
-                const { receiver, conversation, content } = message
+                const { receiver, converId, text, date } = message
 
-                if( !receiver || !content ){
-                    return this.socket.emit('error', {status:400, message: 'Missing fields'})
-                }
+                this.socket.join(converId)
 
-                //One way
-                this.socket.to(receiver).to(this.socket.id).emit('privateMessage', { message })
+                this.socket.to(converId).emit('privateMessage', { message })
                 
-                //Creating a room named with converId
 
                 
 
@@ -35,13 +31,6 @@ export default class MessagesSockets {
                 }
             }
         } )
-
-        this.socket.on('toggleSeen', async (messageId) => {
-            try {
-                //...
-            } catch (error) {
-                //...
-            }
-        })
     }
+
 }

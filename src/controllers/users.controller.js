@@ -98,12 +98,7 @@ export default class UsersController{
 
     async verifySession (req, res) {
         try {
-            const cookie = req.headers.cookie
-            console.log(cookie)
-            // if(cookie){
-            //     console.log(res)
-            // }
-
+            res.json({'message': 'Authenticated'})            
         } catch (error) {
             res.status(500).send({message: error.message})
         }

@@ -4,7 +4,7 @@ import mongoosePaginate from 'mongoose-paginate-v2'
 const conversationCollection = 'conversations'
 
 const conversationSchema = new Schema ({
-    conversation_name: {
+    name: {
         type: String,
         default: ''
     },
@@ -36,19 +36,13 @@ const conversationSchema = new Schema ({
 
 })
 
-// conversationSchema.pre('find', function(next){
-//     this.populate('users messages')
-//     next()
-// })
-
-// conversationSchema.pre('findOne', function(next){
-//     this.populate('users')
-//     next()
-// })
-
 
 conversationSchema.pre('findOne', function(next){
-    this.populate('messages', '-_id')
+    this.populate({
+        path: 'messages',
+        select: '-_id',
+        options: {sort: {created_at: 1}}
+    })
     next()
 })
 
