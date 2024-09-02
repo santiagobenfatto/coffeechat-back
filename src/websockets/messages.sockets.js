@@ -1,3 +1,6 @@
+import { ElementNotFound, UserNotFound } from '../errors/error-exceptions.js'
+
+
 export default class MessagesSockets {
     constructor(socket, messagesService){
         this.socket = socket

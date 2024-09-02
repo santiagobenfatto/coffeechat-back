@@ -6,24 +6,24 @@ import { conversationsService } from '../services/index.js'
 export default class ConversationsController {
     
 
-    async getConver(req, res) {
-        try {
-            const { converId } = req.body
+    // async getConver(req, res) {
+    //     try {
+    //         const { converId } = req.body
                         
-            if(!converId) {
-                return res.status(404).send({message: `Incomplete values`})
-            }
+    //         if(!converId) {
+    //             return res.status(404).send({message: `Incomplete values`})
+    //         }
             
-            const conver = await conversationsService.getConver(converId)
+    //         const conver = await conversationsService.getConver(converId)
 
-            res.send({status: 'Success', conver: conver})
+    //         res.send({status: 'Success', conver: conver})
             
-        } catch (error) {
-            if(error instanceof ElementNotFound){
-                return res.status(404).send({message:error.message})
-            }
-        }
-    }
+    //     } catch (error) {
+    //         if(error instanceof ElementNotFound){
+    //             return res.status(404).send({message:error.message})
+    //         }
+    //     }
+    // }
 
     async getConverMessages (req, res) {
         try {

@@ -14,13 +14,16 @@ export const initSockets = (httpServer) => {
     io.on('connection', (socket) => {
         console.log(`Socket ${socket.id} has been connected`)
         const reqUser = socket.request.user
-        const userData = {
-            first_name: reqUser.first_name,
-            nickname: reqUser.nickname,
-            email: reqUser.email,
-            avatar_url: reqUser.avatar_url
-        } 
-        socket.emit('userData', userData)
+        console.log(reqUser)
+        if(reqUser){
+            const userData = {
+                first_name: reqUser.first_name,
+                nickname: reqUser.nickname,
+                email: reqUser.email,
+                avatar_url: reqUser.avatar_url
+            } 
+            socket.emit('userData', userData)
+        }
 
         const messageService = new MessageServices()
         new MessagesSockets(socket, messageService)

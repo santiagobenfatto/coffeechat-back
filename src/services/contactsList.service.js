@@ -7,8 +7,7 @@ export default class ContactsListService {
 
     getContacts = async (userId) => {
         const user =  await usersRepository.getById(userId)
-        //const userList = user.contact_list
-
+        
         if(!user){
             throw new UserNotFound(`Usuario no encontrado`)
         }
@@ -22,9 +21,6 @@ export default class ContactsListService {
     }
 
     getRequests = async (userId) => {
-        //const user =  await usersRepository.getById(userId)
-        //const listId = user.contact_list
-
         const requesters = await contactsListRepository.getRequests(userId)
         
         if(requesters.length === 0){
